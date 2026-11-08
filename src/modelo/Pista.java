@@ -8,12 +8,12 @@ public abstract class Pista {
 
     public abstract String mostrarPista(); 
     
-    public boolean isUsada(){
+    public boolean esUsada(){
         return usada;
     }
     //metodo set para cambiar es estado de una pista a usada
     protected void setUsada(boolean usada){
-        this.usada = usada;
+        this.usada = usada; 
         
     }
             

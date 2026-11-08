@@ -16,25 +16,25 @@ public class BancoPalabras {//crea y gestiona el arrayList
      
     public void cargarPalabras(){//llena mi arrayList palabras
         //Categoria VESTIMENTA:
-        palabras.add(new Palabra("Corbata","vestimenta","los usas con traje"));
-        palabras.add(new Palabra("Chaqueta","vestimenta","para abrigarse"));
+        palabras.add(new Palabra("corbata","vestimenta","los usas con traje"));
+        palabras.add(new Palabra("chaqueta","vestimenta","para abrigarse"));
         
         //Categoria PROFESIONES:
-        palabras.add(new Palabra("Doctor","Profesiones","si no hay alguien que te atiende cuando enfermas, te mueres"));
-        palabras.add(new Palabra("Profesor","Profesiones","Su labor es la compartir concimiento"));
+        palabras.add(new Palabra("doctor","Profesiones","si no hay alguien que te atiende cuando enfermas, te mueres"));
+        palabras.add(new Palabra("profesor","Profesiones","Su labor es la compartir concimiento"));
         
         //Categoria DEPORTES:
-        palabras.add(new Palabra("Ciclismo","Deportes","equilibrio en dos ruedas"));
+        palabras.add(new Palabra("ciclismo","Deportes","equilibrio en dos ruedas"));
         palabras.add(new Palabra("natacion","Deportes","desplazarse a través del agua mediante el movimiento coordinado del cuerpo y las extremidades"));
         
         
         //Categoria COMIDAS:
-        palabras.add(new Palabra("Carne","Comidas","Fuente de proteina de las vacas"));
-        palabras.add(new Palabra("Huevos","Comidas","Lo ponen las gallinas"));
+        palabras.add(new Palabra("carne","Comidas","Fuente de proteina de las vacas"));
+        palabras.add(new Palabra("huevos","Comidas","Lo ponen las gallinas"));
         
         //Categoria PAISES:
-        palabras.add(new Palabra("Colombia","Paises","El pais mas hermoso del mundo"));
-        palabras.add(new Palabra("Brasil","Paises","Lo ponen las gallinas"));
+        palabras.add(new Palabra("colombia","Paises","El pais mas hermoso del mundo"));
+        palabras.add(new Palabra("brasil","Paises","Lo ponen las gallinas"));
         
     }
 
