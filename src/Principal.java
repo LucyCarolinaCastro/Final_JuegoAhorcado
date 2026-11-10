@@ -10,13 +10,13 @@ public class Principal {
     public static void main(String[] args) { 
       Scanner teclado = new Scanner  (System.in);
       
-      //creo el objeto mas importante juego ahorcado
+      //creo el objeto mas importante juego ahorcado con el que se inicializa el juego 
       JuegoAhorcado juego = new JuegoAhorcado();
       
-      juego.mostrarPalabra();
       
       while (!juego.verificarVictoria()&& !juego.verificarDerrota()){
           System.out.println("------MENU DE JUEGO-------");
+          juego.mostrarPalabra();
           System.out.println("1. intentar una letra");
           System.out.println("2. Pista: mostrar categoria de la palabra");
           System.out.println("3. pista: mostrar descripcion de la palabra");
@@ -70,10 +70,7 @@ public class Principal {
                     System.out.println("Debe ingresar una opcion valida.");
                 break;
                 }
-             
-          
-          
-          
+         
       }
             
     }

@@ -147,10 +147,16 @@ public class JuegoAhorcado {
         System.out.println("La palabra era: " + palabraReal);
         intentosFallidos = 7;
         return false;
+        }
     }
-    
-
-}
+    //metodo para obtener la palabra a adivinar para luego poder llamar el metodo en ventana del juego, muestra el avance de la palabra a adivinar
+    public String obtenerPalabraOculta(){
+        String resultado = "";
+        for(int i = 0; i < palabraOculta.length; i++){
+            resultado += palabraOculta[i] + " ";
+        }
+        return resultado;
+    }
 }
         
         
