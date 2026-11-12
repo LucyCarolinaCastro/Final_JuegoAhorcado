@@ -1,20 +1,20 @@
 
 package vista;
 import logica.JuegoAhorcado;
+import javax.swing.JOptionPane;
 
 
 public class VentanaJuego extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaJuego.class.getName());
-    private JuegoAhorcado juego;
+    private JuegoAhorcado juego; //La ventana tendra un objeto JuegoAhorcado
 
-    /**
-     * Creates new form VentanaJuego
-     */
     public VentanaJuego() {
         initComponents();
+        //creamos una nueva partida 
         juego = new JuegoAhorcado();
         lblpalabra.setText(juego.obtenerPalabraOculta());//cambiamos el texto que aparece en pantalla para mostrar 
+        lblMensajes.setText(juego.getMensaje());
         
     }
 
@@ -39,6 +39,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         btnIntentar = new javax.swing.JButton();
         lblAhorcado = new javax.swing.JLabel();
         lblMensajes = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,19 +57,24 @@ public class VentanaJuego extends javax.swing.JFrame {
         btnCategoria.addActionListener(this::btnCategoriaActionPerformed);
 
         btnLetra.setText("Mostrar una letra");
+        btnLetra.addActionListener(this::btnLetraActionPerformed);
 
         btndescripcion.setText("Mostrar una descripción");
         btndescripcion.addActionListener(this::btndescripcionActionPerformed);
 
         btnAdivinarPalabra.setText("Adivinar la palabra");
+        btnAdivinarPalabra.addActionListener(this::btnAdivinarPalabraActionPerformed);
 
         textPalabraCompleta.addActionListener(this::textPalabraCompletaActionPerformed);
 
         btnIntentar.setText("Intentar Letra");
+        btnIntentar.addActionListener(this::btnIntentarActionPerformed);
 
         lblAhorcado.setText("lblahorcado");
 
-        lblMensajes.setText("lblMensajes");
+        lblMensajes.setText("                                          lblMensajes");
+
+        jLabel1.setText("¡Arriesgate y adivina la palabra!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,30 +82,10 @@ public class VentanaJuego extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAdivinar)
-                        .addGap(30, 30, 30)
-                        .addComponent(lblpalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btndescripcion)
-                            .addComponent(btnLetra)
-                            .addComponent(btnCategoria)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(Textletra, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(btnIntentar))
-                            .addComponent(textPalabraCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblAhorcado, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdivinarPalabra)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(lblAdivinar)
+                .addGap(30, 30, 30)
+                .addComponent(lblpalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,8 +93,37 @@ public class VentanaJuego extends javax.swing.JFrame {
                         .addComponent(titulo)
                         .addGap(126, 126, 126))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblMensajes, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124))))
+                        .addComponent(lblMensajes, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(textPalabraCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnAdivinarPalabra))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btndescripcion)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(14, 14, 14)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(btnCategoria)
+                                                .addComponent(btnLetra))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Textletra, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnIntentar)))))))
+                .addGap(33, 33, 33)
+                .addComponent(lblAhorcado, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,49 +134,110 @@ public class VentanaJuego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdivinar)
                     .addComponent(lblpalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensajes, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnIntentar)
+                            .addComponent(Textletra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCategoria)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLetra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btndescripcion)
-                        .addGap(24, 24, 24)
-                        .addComponent(Textletra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIntentar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGap(44, 44, 44)
                         .addComponent(textPalabraCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAdivinarPalabra))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAhorcado, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensajes)
-                .addGap(19, 19, 19))
+                        .addComponent(btnAdivinarPalabra)
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAhorcado, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(25, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    //metodo para finalizar el juego lo llamamos cada vez que gana o pierde el jugador
+    private void finalizarJuego(){//habilitar o deshabilitar un componente de la interfaz
+           Textletra.setEnabled(false);
+           textPalabraCompleta.setEnabled(false);
+           btnIntentar.setEnabled(false);
 
+           btnAdivinarPalabra.setEnabled(false);
+           btnAdivinarPalabra.setEnabled(false);
+
+           btnCategoria.setEnabled(false);
+           btnLetra.setEnabled(false);
+           btndescripcion.setEnabled(false);
+        }
+    
     private void TextletraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextletraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextletraActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
-        // TODO add your handling code here:
+        juego.elegirPista(0);//indice de la pista categoria
+        lblMensajes.setText(juego.getMensaje());//trae el mensaje de la pista categoria
     }//GEN-LAST:event_btnCategoriaActionPerformed
 
     private void btndescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndescripcionActionPerformed
-        // TODO add your handling code here:
+        juego.elegirPista(1);//indice de la pista descripcion
+        lblMensajes.setText(juego.getMensaje());//trae el mensaje de la pista categoria
     }//GEN-LAST:event_btndescripcionActionPerformed
 
     private void textPalabraCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPalabraCompletaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textPalabraCompletaActionPerformed
+
+    private void btnIntentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntentarActionPerformed
+        // Obtenemos el texto escrito en la caja Textletra
+        String entrada = Textletra.getText();
+        if(entrada.length() != 1){//se verifica que ingrese una sola letra
+            lblMensajes.setText("Debe ingresar una sola letra y no dejar espacios");
+            return;
+        }
+        juego.intentarLetra(entrada.charAt(0));
+        lblMensajes.setText(juego.getMensaje());
+        lblpalabra.setText(juego.obtenerPalabraOculta());//muestra las letras correctas intentadas
+           
+        
+        if (juego.verificarVictoria()){
+            JOptionPane.showMessageDialog(this,juego.getMensaje());
+            finalizarJuego();
+        }
+        else if(juego.verificarDerrota()){
+            JOptionPane.showMessageDialog(this,juego.getMensaje());
+            finalizarJuego();
+        }
+        Textletra.setText("");
+    }//GEN-LAST:event_btnIntentarActionPerformed
+
+    private void btnAdivinarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdivinarPalabraActionPerformed
+        String palabraIngresada = textPalabraCompleta.getText();//leer la palabra en el lbl
+        juego.intentarPalabra(palabraIngresada); // verificamos si La palabra coincide con la palabra secreta
+        
+        if(juego.verificarVictoria()){
+            lblpalabra.setText(palabraIngresada);// Actualizar la palabra mostrada en el lbl 
+            JOptionPane.showMessageDialog(this,"¡Felicidades! Has adivinado la palabra.");
+            //TERMINA EL JUEGO
+            finalizarJuego();
+        }else{
+            JOptionPane.showMessageDialog(this,juego.getMensaje());
+            //TERMINA EL JUEGO
+            finalizarJuego();
+        }
+    }//GEN-LAST:event_btnAdivinarPalabraActionPerformed
+
+    private void btnLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLetraActionPerformed
+        juego.elegirPista(2);//indice de la pista descripcion
+        lblMensajes.setText(juego.getMensaje());
+    }//GEN-LAST:event_btnLetraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +271,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     private javax.swing.JButton btnIntentar;
     private javax.swing.JButton btnLetra;
     private javax.swing.JButton btndescripcion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAdivinar;
     private javax.swing.JLabel lblAhorcado;
     private javax.swing.JLabel lblMensajes;

@@ -14,6 +14,7 @@ public class JuegoAhorcado {
     private int intentosFallidos;
     private char[] palabraOculta;
     private Pista[] pistas;//se guardaran varias referencias de tipo lista
+    private String mensaje;
     
     
     //creamos el objeto banco de palabras
@@ -43,18 +44,17 @@ public class JuegoAhorcado {
         this.pistas[0] = new PistaCategoria(palabraActual);
         this.pistas[1] = new PistaTexto(palabraActual);
         this.pistas[2] = new PistaLetra(palabraActual);
-                
-        //System.out.println("Palabra seleccionada: "
-        // + palabraActual.getTexto());
+        
+        mensaje = "Bienvenido al juego!";
+      
     }
    
-    
     
   //creamos un metodo para gestionar las letras que ingresa el usuario  
     public void intentarLetra(char letra){
         //verificar que el usuario ingrese caracteres del abcdario 
         if(!Character.isLetter(letra)){
-            System.out.println("Debe ingresar un valor de tipo letra.");
+            mensaje = "Debe ingresar un valor de tipo letra.";
         return;
         }
         boolean encontrada = false;
@@ -73,22 +73,24 @@ public class JuegoAhorcado {
         if(!encontrada){
             //sumamos a el contador de fallos 1 
             intentosFallidos++;
-
-            System.out.println("La palabra no contiene esa letra.");
-            System.out.println("Intentos fallidos: " + intentosFallidos);
+            mensaje = "La palabra no contiene esa letra.\n Intentos fallidos: " + intentosFallidos;
         }
 
         mostrarPalabra();
         
         if(verificarVictoria()){
-        System.out.println("¡Felicidades! Has ganado.");
+        mensaje = "¡Felicidades! Has ganado.";
         }
 
         if(verificarDerrota()){
-        System.out.println("Has perdido.");
-        System.out.println("La palabra era: " + palabraActual.getTexto());
+        mensaje = "Has perdido.La palabra era: " + palabraActual.getTexto();
         }
     }   
+    
+    //metodo para obtener el mensaje en el juego
+    public String getMensaje(){
+        return mensaje;
+    }
     
     
     //metodo para mostrar la palabra    
@@ -120,19 +122,18 @@ public class JuegoAhorcado {
     
     //metodo para elegir una pista desde su indice
     public void elegirPista(int opcion){
-        
-        
-        if(pistas[opcion].esUsada()){
-            System.out.println("Esta pista ya fue utilizada");
-        }else{
-            System.out.println(pistas[opcion].mostrarPista());                    
-        }
-        
         if(opcion < 0 || opcion >= pistas.length){
-        System.out.println("Opción de pista inválida");
+        mensaje = "Opción de pista inválida" ;
         return;
             }
+        if(pistas[opcion].esUsada()){
+            mensaje = "Esta pista ya fue utilizada";
+        }else{
+            mensaje = pistas[opcion].mostrarPista();                    
+        }
+        
     }
+    
     // metodo para que pueda ingresar una palabra completa para adivinar
     public boolean intentarPalabra(String palabraIngresada){
     String palabraReal = palabraActual.getTexto();
@@ -142,14 +143,15 @@ public class JuegoAhorcado {
         }
         return true;
     }else{
-        System.out.println("Palabra incorrecta :c");
-        System.out.println("Has perdido...");
-        System.out.println("La palabra era: " + palabraReal);
+        mensaje = "Palabra incorrecta, Has perdido...La palabra era: " + palabraReal;
         intentosFallidos = 7;
         return false;
         }
     }
+    
     //metodo para obtener la palabra a adivinar para luego poder llamar el metodo en ventana del juego, muestra el avance de la palabra a adivinar
+    // Swing no sabe mostrar el arreglo de tipo char en un label 
+    //metodo que actua como traductor 
     public String obtenerPalabraOculta(){
         String resultado = "";
         for(int i = 0; i < palabraOculta.length; i++){
@@ -157,7 +159,11 @@ public class JuegoAhorcado {
         }
         return resultado;
     }
+    
+   
 }
+
+ 
         
         
     
